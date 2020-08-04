@@ -1,31 +1,41 @@
 import requests
 from bs4 import BeautifulSoup
 
+class WebSudoluScraper:
+    BASE_URL = "http://nine.websudoku.com/"
+    EMPTY_CELL = 0
+    def __init__(self):
+        pass
 
-base_url = "https://www.websudoku.com/"
-level_param = "level=1"
-url = f"{base_url}?{level_param}"
-url = "http://nine.websudoku.com/?level=1"
-page = requests.get(url)
+    def get_grid(self, level=1):
+        page = self._get_page(level)
 
-soup = BeautifulSoup(page.content, "html.parser")
+        soup = BeautifulSoup(page.content, "html.parser")
+        grid_elem = soup.find(id='puzzle_grid')
 
-results = soup.find(id='puzzle_grid')
+        grid = []
+        for row_elem in grid_elem:
+            row = []
 
-print(results.prettify())
+            for cell_elem in row_elem:
+                try:
+                    value = cell_elem.next_element['value']
+                    row.append(int(value))
+                except KeyError:
+                    row.append(self.EMPTY_CELL)
 
-grid = []
-for i, row_elem in enumerate(results):
-    row = []
+            grid.append(row)
 
-    for j, cell_elem in enumerate(row_elem):
-        try:
-            if cell_elem.next_element['value']:
-                row.append(int(cell_elem.next_element['value']))
-        except KeyError:
-            row.append(0)
+        return grid
 
-    grid.append(row)
+    def _get_page(self, level=1):
+        level_param = f"level={level}"
+        url = f"{self.BASE_URL}?{level_param}"
+        page = requests.get(url)
+        return page
 
-for row in grid:
-    print(row)
+if __name__ == "__main__":
+    grid = WebSudoluScraper().get_grid()
+
+    for row in grid:
+        print(row)

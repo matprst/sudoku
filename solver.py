@@ -1,3 +1,4 @@
+from scraper import WebSudoluScraper
 import copy
 import time
 import sys
@@ -149,6 +150,8 @@ grid = [
     [0, 5, 0, 8, 0, 0, 7, 0, 0],
     [1, 0, 0, 0, 3, 7, 2, 5, 9],
 ]
+parser = WebSudoluScraper()
+grid = parser.get_grid(level=1)
 
 # grid = [
 #     [0, 3, 4, 0],
