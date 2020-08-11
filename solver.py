@@ -1,6 +1,5 @@
 from grid import Grid
 from scraper import WebSudokuScraper
-import copy
 
 class Solver:
     SIZE = 9
@@ -32,20 +31,15 @@ class Solver:
         return None
 
     def is_valid(self, grid, row, col, n):
-        if not self.row_is_valid(grid, row, col, n):
-            return False
-        elif not self.column_is_valid(grid, row, col, n):
-            return False
-        elif not self.square_is_valid(grid, row, col, n):
-            return False
-        else:
-            return True
+        return self.row_is_valid(grid, row, n) \
+            and self.column_is_valid(grid, col, n) \
+            and self.square_is_valid(grid, row, col, n)
 
-    def row_is_valid(self, grid, row, col, n):
+    def row_is_valid(self, grid, row, n):
         row_nums = [cell.content for cell in grid[row] if not cell.is_empty()]
         return n not in row_nums
 
-    def column_is_valid(self, grid, row, col, n):
+    def column_is_valid(self, grid, col, n):
         col_nums = [grid[j][col].content for j in range(self.SIZE) if not grid[j][col].is_empty()]
         return n not in col_nums
 
@@ -82,8 +76,8 @@ class Solver:
         return True
 
 scraper = WebSudokuScraper()
-grid = Grid(scraper.get_grid())
-print(grid)
+sudoku_grid = Grid(scraper.get_grid())
+print(sudoku_grid)
 
 # grid = [
 #     [0, 3, 4, 0],
@@ -94,4 +88,4 @@ print(grid)
 # grid = Grid(grid)
 
 solver = Solver()
-print(solver.solve(grid))
+print(solver.solve(sudoku_grid))

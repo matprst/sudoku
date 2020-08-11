@@ -29,10 +29,9 @@ class Cell:
     def __eq__(self, other):
         if isinstance(other, Cell):
             return self.val == other.val
-        elif isinstance(other, int):
+        if isinstance(other, int):
             return self.val == other
-        else:
-            return False
+        return False
 
 class Grid:
     def __init__(self, grid):
@@ -57,9 +56,9 @@ class Grid:
 
         # check columns
         for col in range(self.size):
-            column = [self.grid[row][col] for row in range(self.size)]
+            col_values = [self.grid[row][col] for row in range(self.size)]
             for n in nums:
-                if n not in column:
+                if n not in col_values:
                     errors += 1
                     # return False
         
@@ -177,7 +176,8 @@ class GridSquareIterator:
         if row >= self.square_size or col >= self.square_size:
             raise StopIteration
         
-        return [self.grid[row*self.square_size+i][col*self.square_size+j] for i in range(self.square_size) for j in range(self.square_size)]
+        return [self.grid[row*self.square_size+i][col*self.square_size+j] \
+                for i in range(self.square_size) for j in range(self.square_size)]
     
     def __iter__(self):
         return self
@@ -197,13 +197,13 @@ if __name__ == "__main__":
     #     [1, 0, 0, 0, 3, 7, 2, 5, 9],
     # ]
 
-    grid = [
+    sudoku_grid = [
         [0, 3, 4, 0],
         [4, 0, 0, 2],
         [1, 0, 0, 3],
         [0, 2, 1, 0],
     ]
-    sqr_it = GridSquareIterator(grid)
+    sqr_it = GridSquareIterator(sudoku_grid)
 
-    for col in sqr_it:
-        print(col)
+    for column in sqr_it:
+        print(column)

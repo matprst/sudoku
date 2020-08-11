@@ -15,16 +15,16 @@ class WebSudokuScraper:
 
         grid = []
         for row_elem in grid_elem:
-            row = []
+            _row = []
 
             for cell_elem in row_elem:
                 try:
                     value = cell_elem.next_element['value']
-                    row.append(int(value))
+                    _row.append(int(value))
                 except KeyError:
-                    row.append(self.EMPTY_CELL)
+                    _row.append(self.EMPTY_CELL)
 
-            grid.append(row)
+            grid.append(_row)
 
         return grid
 
@@ -35,7 +35,7 @@ class WebSudokuScraper:
         return page
 
 if __name__ == "__main__":
-    grid = WebSudokuScraper().get_grid()
+    sudoku_grid = WebSudokuScraper().get_grid()
 
-    for row in grid:
+    for row in sudoku_grid:
         print(row)
