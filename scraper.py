@@ -35,7 +35,7 @@ class WebSudokuScraper:
         return page
 
 if __name__ == "__main__":
-    grid = WebSudoluScraper().get_grid()
+    grid = WebSudokuScraper().get_grid()
 
     for row in grid:
         print(row)
