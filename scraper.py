@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-class WebSudoluScraper:
+class WebSudokuScraper:
     BASE_URL = "http://nine.websudoku.com/"
     EMPTY_CELL = 0
     def __init__(self):
