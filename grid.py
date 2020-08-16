@@ -122,6 +122,9 @@ class GridCellIterator:
             raise StopIteration
         
         return self.grid[row][col]
+    
+    def __iter__(self):
+        return self
 
 class GridRowIterator:
     def __init__(self, grid):
@@ -203,7 +206,7 @@ if __name__ == "__main__":
         [1, 0, 0, 3],
         [0, 2, 1, 0],
     ]
-    sqr_it = GridSquareIterator(sudoku_grid)
+    sqr_it = GridCellIterator(sudoku_grid)
 
     for column in sqr_it:
         print(column)

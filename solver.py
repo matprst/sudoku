@@ -75,17 +75,18 @@ class Solver:
                     return False
         return True
 
-scraper = WebSudokuScraper()
-sudoku_grid = Grid(scraper.get_grid())
-print(sudoku_grid)
+if __name__ == "__main__":
+    scraper = WebSudokuScraper()
+    sudoku_grid = Grid(scraper.get_grid())
+    print(sudoku_grid)
 
-# grid = [
-#     [0, 3, 4, 0],
-#     [4, 0, 0, 2],
-#     [1, 0, 0, 3],
-#     [0, 2, 1, 0],
-# ]
-# grid = Grid(grid)
+    # grid = [
+    #     [0, 3, 4, 0],
+    #     [4, 0, 0, 2],
+    #     [1, 0, 0, 3],
+    #     [0, 2, 1, 0],
+    # ]
+    # grid = Grid(grid)
 
-solver = Solver()
-print(solver.solve(sudoku_grid))
+    solver = Solver()
+    print(solver.solve(sudoku_grid))
