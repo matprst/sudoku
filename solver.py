@@ -1,12 +1,9 @@
-from grid import Grid
-from scraper import WebSudokuScraper
-
 class Solver:
     SIZE = 9
     def __init__(self, grid=None):
         pass
 
-    def solve(self, grid, tabs=0):
+    def solve(self, grid):
         cell = self.get_empty_cell(grid)
 
         if cell is None:
@@ -17,7 +14,7 @@ class Solver:
         for n in range(1, self.SIZE+1):
             if self.is_valid(grid, row, col, n):
                 grid.fill_cell(row, col, n)
-                new_grid = self.solve(grid, tabs+1)
+                new_grid = self.solve(grid)
                 if self.is_solved(new_grid):
                     return new_grid
                 else:
@@ -74,19 +71,3 @@ class Solver:
                 if n not in square:
                     return False
         return True
-
-if __name__ == "__main__":
-    scraper = WebSudokuScraper()
-    sudoku_grid = Grid(scraper.get_grid())
-    print(sudoku_grid)
-
-    # grid = [
-    #     [0, 3, 4, 0],
-    #     [4, 0, 0, 2],
-    #     [1, 0, 0, 3],
-    #     [0, 2, 1, 0],
-    # ]
-    # grid = Grid(grid)
-
-    solver = Solver()
-    print(solver.solve(sudoku_grid))

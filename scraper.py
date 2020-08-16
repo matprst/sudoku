@@ -33,9 +33,3 @@ class WebSudokuScraper:
         url = f"{self.BASE_URL}?{level_param}"
         page = requests.get(url)
         return page
-
-if __name__ == "__main__":
-    sudoku_grid = WebSudokuScraper().get_grid()
-
-    for row in sudoku_grid:
-        print(row)

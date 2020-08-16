@@ -108,7 +108,12 @@ class Game:
         else:
             color = Color.DARK_GREY.value
         
-        pygame.draw.rect(screen, Color.DARK_GREY.value, (col*self.CELL_WIDTH, row*self.CELL_HEIGHT, self.CELL_WIDTH, self.CELL_HEIGHT), self.CELL_THICKNESS)
+        pygame.draw.rect(
+            screen, 
+            Color.DARK_GREY.value, 
+            (col*self.CELL_WIDTH, row*self.CELL_HEIGHT, self.CELL_WIDTH, self.CELL_HEIGHT), 
+            self.CELL_THICKNESS
+        )
         self.write_number(screen, cell.content, col, row, color)
     
     def draw_solved(self, screen):
